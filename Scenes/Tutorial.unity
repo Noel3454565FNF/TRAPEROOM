@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 267817373}
   - component: {fileID: 267817372}
   - component: {fileID: 267817374}
+  - component: {fileID: 267817377}
   - component: {fileID: 267817376}
   - component: {fileID: 267817375}
   m_Layer: 0
@@ -466,9 +467,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   cooldownDMG: 0
-  canDie: 0
+  canDie: 1
   canMove: 1
   moveType: normal
+  moveSpeed: 6
+  speed: 6
+  jumpHight: 200
+  canJump: 1
+  PlayerSpeed: 6
+  jumpForce: 75
   transform: {fileID: 267817373}
   rgb: {fileID: 267817376}
 --- !u!70 &267817375
@@ -517,11 +524,11 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_UseAutoMass: 1
+  m_Mass: 1.1426549
+  m_LinearDrag: 0.5
+  m_AngularDrag: 0.5
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -533,6 +540,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &267817377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267817371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3668efdf05ddfb54fa3e57eb2cafec82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 267817374}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,7 +1236,7 @@ GameObject:
   - component: {fileID: 1893355602}
   m_Layer: 0
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1564,6 +1584,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 568079326559407411, guid: 663dc48a189fcf24eb9ae0db30505ef7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926172236664553438, guid: 663dc48a189fcf24eb9ae0db30505ef7, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6472945709242796404, guid: 663dc48a189fcf24eb9ae0db30505ef7, type: 3}

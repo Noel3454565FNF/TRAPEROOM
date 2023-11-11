@@ -5,7 +5,6 @@ using UnityEngine;
 public class damageManager : MonoBehaviour
 {
     public PlayerManager playerManager;
-    private GameObject DMB;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +19,7 @@ public class damageManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name == DMB.name)
+        if(collision.gameObject.tag == "red block")
         {
             playerManager.Damage("normal");
         }
