@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
     public int health = 1;
+    public GameManager GM;
+    public string customM = "normal";
     public bool cooldownDMG = false;
     public bool canDie = true;
     public bool canMove = true;
@@ -20,6 +22,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float jumpForce;
     public Transform transform;
     public Rigidbody2D rgb;
+
+
+
+    public GameObject TP_sh;
+    public bool canTP = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +80,25 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
+
+
+
+
+        if (customM == "normal")
+        {
+            TP_sh.active = false;
+        }
+        if (customM == "TP")
+        {
+            TP_sh.active = true;
+            TP_sh.transform.position = new Vector2(rgb.position.x + 4, rgb.position.y);
+
+            if (Input.GetKeyDown(KeyCode.Z) && canTP == true)
+            {
+                canTP = false;
+                StartCoroutine(TPcooldown());
+            }
+        }
     }
 
 
@@ -81,20 +107,34 @@ public class PlayerManager : MonoBehaviour
         rgb.velocity = new Vector2(DirectionX * PlayerSpeed, rgb.velocity.y);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "red block")
+        {
+            print("red tuch");
+            Damage("normal");
+        }
+
+        if (collision.gameObject.tag == "cheese")
+        {
+            print("cheese");
+            transform.position = GM.SPP;
+            var temp = GM.curLevel;
+            GM.changeLevel(temp);
+        }
+
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         print("collid");
+        print(collision.gameObject.name);
         if(collision.gameObject.tag == "ground")
         {
             canJump = true;
             jumpHight = 75;
         }
 
-        if(collision.gameObject.tag == "red block")
-        {
-            print("red tuch");
-            Damage("normal");
-        }
     }
 
 
@@ -124,6 +164,16 @@ public class PlayerManager : MonoBehaviour
             yield return new WaitForSeconds(1);
             cooldownDMG = false;
             StopCoroutine(coolDownDMG());
+        }
+    }
+
+    IEnumerator TPcooldown()
+    {
+        if(canTP == false)
+        {
+            yield return new WaitForSeconds(1.5f);
+            canTP = true;
+            StopCoroutine(TPcooldown());
         }
     }
 
