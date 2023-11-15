@@ -22,15 +22,20 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float jumpForce;
     public Transform transform;
     public Rigidbody2D rgb;
+    public GameObject BS;
 
 
 
     public GameObject TP_sh;
     public bool canTP = true;
+    public string TPdir = "nop";
     // Start is called before the first frame update
     void Start()
     {
-        
+        BS.active = false;
+        BS.transform.localScale = new Vector3(Screen.height, Screen.width, 0);
+        BS.transform.localPosition = new Vector3(0, 0, -2);
+
     }
 
     // Update is called once per frame
@@ -86,18 +91,47 @@ public class PlayerManager : MonoBehaviour
 
         if (customM == "normal")
         {
-            TP_sh.active = false;
+            changeMecha("normal");
         }
         if (customM == "TP")
         {
-            TP_sh.active = true;
-            TP_sh.transform.position = new Vector2(rgb.position.x + 4, rgb.position.y);
+            if (DirectionX > 0)
+            {
+                TP_sh.transform.position = new Vector2(rgb.position.x + 4, rgb.position.y);
+                TPdir = "right";
+            }
+            if (DirectionX < 0)
+            {
+                TP_sh.transform.position = new Vector2(rgb.position.x - 4, rgb.position.y);
+                TPdir = "left";
+            }
+            if (DirectionX == 0)
+            {
+                TP_sh.transform.position = new Vector2(rgb.position.x, rgb.position.y);
+                TPdir = "nop";
+            }
 
             if (Input.GetKeyDown(KeyCode.Z) && canTP == true)
             {
                 canTP = false;
                 StartCoroutine(TPcooldown());
             }
+        }
+    }
+
+
+    public void changeMecha(string type)
+    {
+        if (type == "normal")
+        {
+            TP_sh.active = false;
+            customM = type;
+        }
+
+        if (type == "TP")
+        {
+            TP_sh.active = true;
+            customM = type;
         }
     }
 
@@ -119,8 +153,13 @@ public class PlayerManager : MonoBehaviour
         {
             print("cheese");
             transform.position = GM.SPP;
-            var temp = GM.curLevel;
+            var temp = GM.curLevel + 1;
             GM.changeLevel(temp);
+        }
+
+        if (collision.gameObject.tag == "rebound-platform")
+        {
+            rgb.AddForce(new Vector2(0f, 400));
         }
 
     }
@@ -171,8 +210,14 @@ public class PlayerManager : MonoBehaviour
     {
         if(canTP == false)
         {
-            yield return new WaitForSeconds(1.5f);
+            BS.active = true;
+            rgb.position = TP_sh.transform.position;
+            TP_sh.active = false;
+            yield return new WaitForSeconds(0.1f);
+            BS.active = false;
+            yield return new WaitForSeconds(4f);
             canTP = true;
+            TP_sh.active = true;
             StopCoroutine(TPcooldown());
         }
     }

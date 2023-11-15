@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] levelpref;
     public Transform playerT;
     public Vector3 SPP;
+    public bool canChange = true;
 
     // Start is called before the first frame update
     void Start()
@@ -23,20 +24,35 @@ public class GameManager : MonoBehaviour
     public void changeLevel(int level)
     {
 
-        if (levelList.Length < level || levelList.Length <= 0)
+        /*        if (levelList.Length < level || levelList.Length <= 0)
+                {
+                    SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+                    SceneManager.LoadSceneAsync("Death");
+                }
+        */
+        if (canChange == true)
         {
-            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-            SceneManager.LoadSceneAsync("Death");
-        }
-        
-            GameObject.Destroy(GameObject.Find(levelList[curLevel]));
+            canChange = false;
+            GameObject.Destroy(GameObject.Find("ROOM" + curLevel));
             GameObject.Instantiate(levelpref[level]);
             curLevel = level;
             playerT.position = SPP;
             print("room changed");
-        
+            StartCoroutine(Reload());
+        }
 
     }
+
+    IEnumerator Reload()
+    {
+        if (canChange == false)
+        {
+            yield return new WaitForSeconds(1f);
+            canChange = true;
+            StopCoroutine(Reload());
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
