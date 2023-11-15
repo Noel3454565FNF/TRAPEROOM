@@ -494,9 +494,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8956706843284271730}
   - component: {fileID: 1830536957650423962}
+  - component: {fileID: 107560110199465981}
   - component: {fileID: 199010595126926699}
   - component: {fileID: 7433649799807006279}
   - component: {fileID: 2776407521175538804}
+  - component: {fileID: 8426757446811814316}
   m_Layer: 0
   m_Name: cheese-removebg-preview
   m_TagString: cheese
@@ -571,6 +573,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &107560110199465981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3895901733532159266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19e04ef6372deb44b1c3f5748177b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Par: {fileID: 5376311507717213902}
 --- !u!61 &199010595126926699
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -688,6 +703,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.29, y: 2.37}
   m_EdgeRadius: 0
+--- !u!114 &8426757446811814316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3895901733532159266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19e04ef6372deb44b1c3f5748177b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Par: {fileID: 0}
 --- !u!1 &5376311507717213902
 GameObject:
   m_ObjectHideFlags: 0

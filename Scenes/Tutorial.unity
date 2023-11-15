@@ -235,7 +235,11 @@ MonoBehaviour:
   moveSpeed: 6
   speed: 6
   jumpHight: 200
+  coll: 0
+  chargingJump: 0
+  canChargeJump: 1
   canJump: 1
+  jumpCharge: 0
   PlayerSpeed: 6
   jumpForce: 75
   transform: {fileID: 267817373}
@@ -508,6 +512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 519420032}
+  - component: {fileID: 519420033}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
@@ -636,6 +641,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c26470d67bb1a84a8278b3dfd850903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camT: {fileID: 519420032}
+  player: {fileID: 267817373}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,6 +749,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ROOM1
       objectReference: {fileID: 0}
+    - target: {fileID: 5376311507717213902, guid: 7b22bb0a9f1a2a04c9f1bc251b0effe4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6577019800882910404, guid: 7b22bb0a9f1a2a04c9f1bc251b0effe4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -806,9 +829,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curLevel: 1
   levelList:
-  - room1
-  - room2
-  - room3
+  - ROOM1
+  - ROOM2
+  - ROOM3
   levelpref:
   - {fileID: 5376311507717213902, guid: 7b22bb0a9f1a2a04c9f1bc251b0effe4, type: 3}
   - {fileID: 5376311507717213902, guid: 7b22bb0a9f1a2a04c9f1bc251b0effe4, type: 3}
@@ -816,6 +839,7 @@ MonoBehaviour:
   - {fileID: 4968641399415926166, guid: af04db576cd4d0742959252218a98b29, type: 3}
   playerT: {fileID: 267817373}
   SPP: {x: -5.41, y: -0.89, z: 0}
+  canChange: 1
 --- !u!4 &2041602042
 Transform:
   m_ObjectHideFlags: 0

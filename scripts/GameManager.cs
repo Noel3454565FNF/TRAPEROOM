@@ -33,11 +33,11 @@ public class GameManager : MonoBehaviour
         if (canChange == true)
         {
             canChange = false;
-            GameObject.Destroy(GameObject.Find("ROOM" + curLevel));
+            //GameObject.Destroy(GameObject.Find(levelList[curLevel]));
             GameObject.Instantiate(levelpref[level]);
             curLevel = level;
             playerT.position = SPP;
-            print("room changed");
+            print(level);
             StartCoroutine(Reload());
         }
 
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     {
         if (canChange == false)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.1f);
             canChange = true;
             StopCoroutine(Reload());
         }

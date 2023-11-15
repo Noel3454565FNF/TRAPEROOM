@@ -15,7 +15,11 @@ public class PlayerManager : MonoBehaviour
     public int moveSpeed = 6;
     public int speed = 500;
     public float jumpHight = 100;
+    public bool coll;
+    public bool chargingJump = false;
+    public bool canChargeJump = true;
     public bool canJump = true;
+    public int jumpCharge = 0;
     private float DirectionX;
     private Rigidbody2D Rigidbody;
     [SerializeField] private float PlayerSpeed;
@@ -117,6 +121,55 @@ public class PlayerManager : MonoBehaviour
                 StartCoroutine(TPcooldown());
             }
         }
+
+
+
+
+        if (Input.GetKey(KeyCode.DownArrow) && coll)
+        {
+            chargingJump = true;
+            StartCoroutine(jumpchargation());
+        }
+
+
+        if (!Input.GetKey(KeyCode.DownArrow) && coll && jumpCharge >= 1)
+        {
+            chargingJump = false;
+            if (jumpCharge == 1)
+            {
+                rgb.AddForce(new Vector2(0f, 500));
+            }
+
+            if (jumpCharge == 2)
+            {
+                rgb.AddForce(new Vector2(0f, 600));
+            }
+
+            if (jumpCharge == 3)
+            {
+                rgb.AddForce(new Vector2(0f, 700));
+            }
+
+            if (jumpCharge == 4)
+            {
+                rgb.AddForce(new Vector2(0f, 800));
+            }
+
+            if (jumpCharge == 5)
+            {
+                rgb.AddForce(new Vector2(0f, 900));
+            }
+
+            if (jumpCharge >= 6)
+            {
+                rgb.AddForce(new Vector2(0f, 1000));
+            }
+            jumpCharge = 0;
+
+
+        }
+
+
     }
 
 
@@ -157,27 +210,53 @@ public class PlayerManager : MonoBehaviour
             GM.changeLevel(temp);
         }
 
-        if (collision.gameObject.tag == "rebound-platform")
-        {
-            rgb.AddForce(new Vector2(0f, 400));
-        }
 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("collid");
-        print(collision.gameObject.name);
+
         if(collision.gameObject.tag == "ground")
         {
             canJump = true;
             jumpHight = 75;
         }
 
+        if (collision.gameObject.tag == "rebound-platform" && chargingJump == false)
+        {
+            rgb.AddForce(new Vector2(0f, 400));
+            canJump = false;
+        }
+
+
     }
 
 
-    public void Damage(string type)
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "rebound-platform")
+        {
+            coll = false;
+        }
+
+    }
+
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+
+
+        if (collision.gameObject.tag == "rebound-platform")
+        {
+            coll = true;
+        }
+
+
+    }
+
+
+        public void Damage(string type)
     {
         if(type == "normal" && health > 0 && cooldownDMG == false)
         {
@@ -222,4 +301,16 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+
+    IEnumerator jumpchargation()
+    {
+        if(canChargeJump == true)
+        {
+            canChargeJump = false;
+            yield return new WaitForSeconds(0.3f);
+            jumpCharge += 1;
+            print(jumpCharge);
+            canChargeJump = true;
+        }
+    }
 }
