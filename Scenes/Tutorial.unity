@@ -245,9 +245,13 @@ MonoBehaviour:
   transform: {fileID: 267817373}
   rgb: {fileID: 267817376}
   BS: {fileID: 287134700}
+  playerSR: {fileID: 267817372}
   TP_sh: {fileID: 360969594}
   canTP: 1
   TPdir: nop
+  canDash: 1
+  inDash: 0
+  dashSpeed: 7
 --- !u!70 &267817375
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

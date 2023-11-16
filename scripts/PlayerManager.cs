@@ -21,24 +21,31 @@ public class PlayerManager : MonoBehaviour
     public bool canJump = true;
     public int jumpCharge = 0;
     private float DirectionX;
+    private float DirectionY;
     private Rigidbody2D Rigidbody;
     [SerializeField] private float PlayerSpeed;
     [SerializeField] private float jumpForce;
     public Transform transform;
     public Rigidbody2D rgb;
     public GameObject BS;
+    public SpriteRenderer playerSR;
 
 
 
     public GameObject TP_sh;
     public bool canTP = true;
     public string TPdir = "nop";
+
+    public bool canDash = true;
+    public bool inDash = false;
+    public int dashSpeed = 7;
     // Start is called before the first frame update
     void Start()
     {
         BS.active = false;
         BS.transform.localScale = new Vector3(Screen.height, Screen.width, 0);
         BS.transform.localPosition = new Vector3(0, 0, -2);
+        changeMecha("dash");
 
     }
 
@@ -82,7 +89,7 @@ public class PlayerManager : MonoBehaviour
 
                 DirectionX = Input.GetAxisRaw("Horizontal");
 
-                if (Input.GetKey(KeyCode.Space) && canJump == true)
+                if (Input.GetKey(KeyCode.UpArrow) && canJump == true && inDash == false)
                 {
                     rgb.AddForce(new Vector2(0f, jumpForce));
                     jumpHight += -10;
@@ -109,16 +116,30 @@ public class PlayerManager : MonoBehaviour
                 TP_sh.transform.position = new Vector2(rgb.position.x - 4, rgb.position.y);
                 TPdir = "left";
             }
-            if (DirectionX == 0)
+/*            if (DirectionX == 0)
             {
                 TP_sh.transform.position = new Vector2(rgb.position.x, rgb.position.y);
                 TPdir = "nop";
             }
-
+*/
             if (Input.GetKeyDown(KeyCode.Z) && canTP == true)
             {
                 canTP = false;
                 StartCoroutine(TPcooldown());
+            }
+        }
+        if (customM == "dash")
+        {
+            if (Input.GetKeyDown(KeyCode.Z) && canDash == true)
+            {
+                canDash = false;
+                StartCoroutine(DashCooldown());
+            }
+
+            if (inDash == true)
+            {
+                DirectionY = Input.GetAxisRaw("Vertical");
+
             }
         }
 
@@ -135,36 +156,38 @@ public class PlayerManager : MonoBehaviour
         if (!Input.GetKey(KeyCode.DownArrow) && coll && jumpCharge >= 1)
         {
             chargingJump = false;
-            if (jumpCharge == 1)
+            var H = jumpCharge;
+            jumpCharge = 0;
+            if (H == 1)
             {
                 rgb.AddForce(new Vector2(0f, 500));
             }
 
-            if (jumpCharge == 2)
+            if (H == 2)
             {
                 rgb.AddForce(new Vector2(0f, 600));
             }
 
-            if (jumpCharge == 3)
+            if (H == 3)
             {
                 rgb.AddForce(new Vector2(0f, 700));
             }
 
-            if (jumpCharge == 4)
+            if (H == 4)
             {
                 rgb.AddForce(new Vector2(0f, 800));
             }
 
-            if (jumpCharge == 5)
+            if (H == 5)
             {
                 rgb.AddForce(new Vector2(0f, 900));
             }
 
-            if (jumpCharge >= 6)
+            if (H >= 6)
             {
                 rgb.AddForce(new Vector2(0f, 1000));
             }
-            jumpCharge = 0;
+            print(jumpCharge);
 
 
         }
@@ -178,12 +201,22 @@ public class PlayerManager : MonoBehaviour
         if (type == "normal")
         {
             TP_sh.active = false;
+            playerSR.color = new Color(255, 255, 255);
             customM = type;
         }
 
         if (type == "TP")
         {
             TP_sh.active = true;
+            playerSR.color = new Color(255, 255, 255);
+            customM = type;
+        }
+
+        if (type == "dash")
+        {
+            TP_sh.active = false;
+            playerSR.color = new Color(255, 115, 0);
+
             customM = type;
         }
     }
@@ -191,7 +224,14 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rgb.velocity = new Vector2(DirectionX * PlayerSpeed, rgb.velocity.y);
+        if (inDash == false)
+        {
+            rgb.velocity = new Vector2(DirectionX * PlayerSpeed, rgb.velocity.y);
+        }
+        else
+        {
+            rgb.velocity = new Vector2(DirectionX * PlayerSpeed, DirectionY * PlayerSpeed);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -208,6 +248,7 @@ public class PlayerManager : MonoBehaviour
             transform.position = GM.SPP;
             var temp = GM.curLevel + 1;
             GM.changeLevel(temp);
+            jumpCharge = 0;
         }
 
 
@@ -220,6 +261,7 @@ public class PlayerManager : MonoBehaviour
         {
             canJump = true;
             jumpHight = 75;
+            jumpCharge = 0;
         }
 
         if (collision.gameObject.tag == "rebound-platform" && chargingJump == false)
@@ -311,6 +353,23 @@ public class PlayerManager : MonoBehaviour
             jumpCharge += 1;
             print(jumpCharge);
             canChargeJump = true;
+        }
+    }
+
+
+    IEnumerator DashCooldown()
+    {
+        if(canDash == false)
+        {
+            rgb.gravityScale = 0;
+            inDash = true;
+            PlayerSpeed += dashSpeed;
+            yield return new WaitForSeconds(1.3f);
+            rgb.gravityScale = 2;
+            inDash = false;
+            PlayerSpeed += -dashSpeed;
+            yield return new WaitForSeconds(3f);
+            canDash = true;
         }
     }
 }
