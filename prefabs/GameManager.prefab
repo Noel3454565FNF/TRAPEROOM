@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5861889904526427464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1119863060816122075}
+  - component: {fileID: 6677864981423083849}
+  - component: {fileID: 854453543801293}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1119863060816122075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5861889904526427464}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6677864981423083849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5861889904526427464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb0eb1a5ef8a33a4d89ea267717083ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curLevel: 1
+  levelList:
+  - ROOM1
+  - ROOM2
+  - ROOM3
+  - ROOM4
+  levelpref:
+  - {fileID: 5376311507717213902, guid: 7b22bb0a9f1a2a04c9f1bc251b0effe4, type: 3}
+  - {fileID: 5376311507717213902, guid: 7b22bb0a9f1a2a04c9f1bc251b0effe4, type: 3}
+  - {fileID: 463223803810126416, guid: 824a6eb3a2dde7749a07f70624136d73, type: 3}
+  - {fileID: 4968641399415926166, guid: af04db576cd4d0742959252218a98b29, type: 3}
+  - {fileID: 7570408079062995540, guid: aad6463b2a34b0744b8bad33f6a79683, type: 3}
+  playerT: {fileID: 0}
+  SPP: {x: -5.41, y: -0.89, z: 0}
+  canChange: 1
+  Spawner: {fileID: 0}
+--- !u!114 &854453543801293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5861889904526427464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4de77ccc64a834db388a28774eb4f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DashColor: {r: 1, g: 0.56868994, b: 0, a: 0}

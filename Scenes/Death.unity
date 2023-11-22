@@ -170,10 +170,10 @@ MonoBehaviour:
   secretdeathAct: 0
   deathNum: 1
   yousuck: {fileID: 21300000, guid: 0b6c146a914109a47bf528d3496050b5, type: 3}
-  yousucking: {fileID: 8300000, guid: 39ffe90a8a084e646bdef090cf91bd5a, type: 3}
   diff: {fileID: 516243421}
   deathThing1: {fileID: 352050084}
   T: 
+  DA: {fileID: 352050086}
 --- !u!1 &352050080
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 352050084}
   - component: {fileID: 352050083}
   - component: {fileID: 352050082}
-  - component: {fileID: 352050081}
+  - component: {fileID: 352050086}
   m_Layer: 0
   m_Name: Deather
   m_TagString: Untagged
@@ -194,25 +194,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &352050081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352050080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RootBone: {fileID: 0}
-  m_BoneTransforms: []
-  m_Bounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  m_AlwaysUpdate: 1
-  m_AutoRebind: 0
 --- !u!331 &352050082
 SpriteMask:
   m_ObjectHideFlags: 0
@@ -345,6 +326,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &352050086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352050080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f77148f86f8f34bbc370452fd48c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dial1: {fileID: 8300000, guid: 6869a616e510ae948a1f1401b97e7de2, type: 3}
+  spy: {fileID: 8300000, guid: 39ffe90a8a084e646bdef090cf91bd5a, type: 3}
 --- !u!1 &516243420
 GameObject:
   m_ObjectHideFlags: 0

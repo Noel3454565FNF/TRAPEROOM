@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+    public COLOR ColorManager;
+
     public int health = 1;
     public GameManager GM;
     public string customM = "normal";
@@ -45,7 +47,6 @@ public class PlayerManager : MonoBehaviour
         BS.active = false;
         BS.transform.localScale = new Vector3(Screen.height, Screen.width, 0);
         BS.transform.localPosition = new Vector3(0, 0, -2);
-        changeMecha("dash");
 
     }
 
@@ -215,7 +216,7 @@ public class PlayerManager : MonoBehaviour
         if (type == "dash")
         {
             TP_sh.active = false;
-            playerSR.color = new Color(255, 115, 0);
+            playerSR.color = ColorManager.DashColor;
 
             customM = type;
         }

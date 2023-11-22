@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Transform playerT;
     public Vector3 SPP;
     public bool canChange = true;
+    public GameObject Spawner;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,8 @@ public class GameManager : MonoBehaviour
             //GameObject.Destroy(GameObject.Find(levelList[curLevel]));
             GameObject.Instantiate(levelpref[level]);
             curLevel = level;
-            playerT.position = SPP;
+            Spawner = GameObject.Find("spwaner");
+            playerT.position = Spawner.transform.position;
             print(level);
             StartCoroutine(Reload());
         }
