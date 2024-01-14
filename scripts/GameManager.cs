@@ -38,8 +38,14 @@ public class GameManager : MonoBehaviour
             GameObject.Instantiate(levelpref[level]);
             curLevel = level;
             Spawner = GameObject.Find("spwaner");
-            playerT.position = Spawner.transform.position;
+            playerT.position = new Vector3(Spawner.transform.position.x, Spawner.transform.position.y, 0);
             print(level);
+            if (level == 4)
+            {
+                playerT.position = new Vector3(-3.90886593f, 3.83999991f, 0);
+            }
+            print(playerT.position);
+            print(Spawner.transform.position);
             StartCoroutine(Reload());
         }
 

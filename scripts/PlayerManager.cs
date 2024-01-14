@@ -31,6 +31,7 @@ public class PlayerManager : MonoBehaviour
     public Rigidbody2D rgb;
     public GameObject BS;
     public SpriteRenderer playerSR;
+    public bool endUltraJump = false;
 
 
 
@@ -188,7 +189,14 @@ public class PlayerManager : MonoBehaviour
             {
                 rgb.AddForce(new Vector2(0f, 1000));
             }
-            print(jumpCharge);
+
+            if (H >= 7)
+            {
+                rgb.AddForce(new Vector2(0f, 1100));
+            }
+
+           print(jumpCharge);
+            endUltraJump = true;
 
 
         }
@@ -246,7 +254,7 @@ public class PlayerManager : MonoBehaviour
         if (collision.gameObject.tag == "cheese")
         {
             print("cheese");
-            transform.position = GM.SPP;
+            //transform.position = GM.SPP;
             var temp = GM.curLevel + 1;
             GM.changeLevel(temp);
             jumpCharge = 0;
@@ -265,8 +273,14 @@ public class PlayerManager : MonoBehaviour
             jumpCharge = 0;
         }
 
-        if (collision.gameObject.tag == "rebound-platform" && chargingJump == false)
+        if (collision.gameObject.tag == "rebound-platform" && chargingJump == false && endUltraJump == false)
         {
+            rgb.AddForce(new Vector2(0f, 400));
+            canJump = false;
+        }
+        if (collision.gameObject.tag == "rebound-platform" && chargingJump == false && endUltraJump == true)
+        {
+            endUltraJump = false;
             rgb.AddForce(new Vector2(0f, 400));
             canJump = false;
         }

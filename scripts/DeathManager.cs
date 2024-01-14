@@ -11,7 +11,12 @@ public class DeathManager : MonoBehaviour
     public AnimationClip bob;
     public AudioSource diff;
     public SpriteRenderer deathThing1;
+    public GameObject deathThing1B;
+
+
+    public GameObject BOB;
     public int T;
+    public bool animInit = false;
 
     public DeathAudio DA;
 
@@ -20,7 +25,7 @@ public class DeathManager : MonoBehaviour
     void Start()
     {
         deathThing1.color = new Color(255, 255, 255);
-        T = Random.Range(1, 2);
+        T = Random.Range(1, 3);
         RandomDeath(T);
     }
 
@@ -30,18 +35,22 @@ public class DeathManager : MonoBehaviour
 
         if (death == 1)
         {
+            deathThing1B.SetActive(true);
             deathThing1.sprite = yousuck;
             deathThing1.transform.localScale = new Vector3(20, 4, 4);
             diff.clip = DA.spy;
             diff.Play();
+            animInit = true;
         }
 
         if (death == 2)
         {
+            BOB.SetActive(true);
             deathThing1.sprite = null;
             deathThing1.transform.localScale = new Vector3(20, 4, 4);
             diff.clip = DA.dial1;
             diff.Play();
+            animInit = true;
 
         }
 
@@ -60,9 +69,14 @@ public class DeathManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (diff.isPlaying == false && animInit == true)
+        {
+            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            SceneManager.LoadSceneAsync("Tutorial");
+            print("revive");
 
-
-        if(Input.GetKeyDown(KeyCode.Z))
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
             SceneManager.LoadSceneAsync("Tutorial");

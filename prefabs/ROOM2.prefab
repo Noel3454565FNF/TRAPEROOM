@@ -973,6 +973,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5846968309515899443, guid: 8c1c56954e1ab8c4cba26eae5e3b5c10, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9149323726243848607, guid: 8c1c56954e1ab8c4cba26eae5e3b5c10, type: 3}
       propertyPath: m_Name
       value: spwaner
